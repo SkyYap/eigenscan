@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 import { createClient } from "@supabase/supabase-js"
-import EigenEvents from "eigenevents/EigenEvents.js"
+import EigenEvents from "./EigenEvents.js"
 
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseKey = process.env.SUPABASE_KEY

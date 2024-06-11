@@ -1,7 +1,7 @@
 import dotenv from "dotenv"
 dotenv.config()
 
-import EigenEvents from "eigenevents/EigenEvents.js"
+import EigenEvents from "./EigenEvents.js"
 import Web3 from "web3"
 import { createClient } from "@supabase/supabase-js"
 import puppeteer from "puppeteer"
@@ -27,7 +27,7 @@ const web3 = new Web3(rpcUrl)
 
 const fromBlock = 19492759
 const toBlock = "latest"
-const blockInterval = 20000
+const blockInterval = 2000
 
 async function fetchKPIs() {
     let currentBlock = fromBlock
@@ -35,45 +35,46 @@ async function fetchKPIs() {
     let avsData = []
     let operatorData = []
     const stakerData = new Set()
-    let tvl = ""
+    // let tvl = ""
 
+    // No longer work since the eigenlayer page is changed
     // TVL
-    try {
-        console.log("Fetching TVL data with Puppeteer...")
+    // try {
+    //     console.log("Fetching TVL data...")
 
-        const browser = await puppeteer.launch({
-            args: [
-                "--no-sandbox",
-                "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-accelerated-2d-canvas",
-                "--no-first-run",
-                "--no-zygote",
-                "--single-process",
-                "--disable-gpu",
-            ],
-            headless: true,
-        })
-        const page = await browser.newPage()
-        await page.goto(tvlUrl, { waitUntil: "networkidle0" })
-        await page.waitForSelector(
-            "span.text-ShortTextL.font-ibmPlexMono.items-center.hidden.sm\\:flex",
-        )
+    //     const browser = await puppeteer.launch({
+    //         args: [
+    //             "--no-sandbox",
+    //             "--disable-setuid-sandbox",
+    //             "--disable-dev-shm-usage",
+    //             "--disable-accelerated-2d-canvas",
+    //             "--no-first-run",
+    //             "--no-zygote",
+    //             "--single-process",
+    //             "--disable-gpu",
+    //         ],
+    //         headless: true,
+    //     })
+    //     const page = await browser.newPage()
+    //     await page.goto(tvlUrl, { waitUntil: "networkidle0" })
+    //     await page.waitForSelector(
+    //         "span.text-ShortTextL.font-ibmPlexMono.items-center.hidden.sm\\:flex",
+    //     )
 
-        tvl = await page.evaluate(() => {
-            const element = document.querySelector(
-                "span.text-ShortTextL.font-ibmPlexMono.items-center.hidden.sm\\:flex",
-            )
-            const match = element ? element.innerText.match(/^[\d,\.]+/) : null
-            return match ? match[0] : "Element not found"
-        })
+    //     tvl = await page.evaluate(() => {
+    //         const element = document.querySelector(
+    //             "span.text-ShortTextL.font-ibmPlexMono.items-center.hidden.sm\\:flex",
+    //         )
+    //         const match = element ? element.innerText.match(/^[\d,\.]+/) : null
+    //         return match ? match[0] : "Element not found"
+    //     })
 
-        console.log("TVL: ", tvl)
+    //     console.log("TVL: ", tvl)
 
-        await browser.close()
-    } catch (error) {
-        console.error("Error fetching TVL with Puppeteer: ", error)
-    }
+    //     await browser.close()
+    // } catch (error) {
+    //     console.error("Error fetching TVL: ", error)
+    // }
 
     // No of AVSs
     try {
@@ -132,7 +133,7 @@ async function fetchKPIs() {
         .from("eigendata")
         .insert([
             {
-                tvl_eth: tvl.toString(),
+                // tvl_eth: tvl.toString(),
                 number_avs: avsData.length.toString(),
                 number_operator: operatorData.length.toString(),
                 number_staker: stakerData.size.toString(),
