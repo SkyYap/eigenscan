@@ -134,11 +134,17 @@ CREATE TABLE pufferdata (
     id SERIAL PRIMARY KEY,
     number_validators INTEGER
 );
-```
 
+```
+## Swagger screenshot integrating Dune API and EigenExplorer API
+
+![Screenshot 2024-06-30 215448](https://github.com/SkyYap/eigenscan/assets/32660903/be848ef8-09d3-4d28-a229-cfcf6a8b5c53)
+![Screenshot 2024-06-30 215514](https://github.com/SkyYap/eigenscan/assets/32660903/abfc8175-ce08-4f70-b6c5-778b88fc3e99)
+![Screenshot 2024-06-30 215532](https://github.com/SkyYap/eigenscan/assets/32660903/4630ad22-eff8-4e21-a8f8-c109b39e0775)
 
 
 ## Further Improvement
 1. Further filter and utilize events from eigenscan-server/PufferEvents.js
 2. Improve frontend dashboard
 3. Added email subscription for grafana alert
+
