@@ -1,6 +1,6 @@
 # Eigenscan is a fork and improved version of [Eigenscan](https://eigenscan.org)
 
-Inspired by the [eigenevents](https://github.com/gowthamsundaresan/eigenevents) library, I have added PufferEvent.js. Inside, there are 4 ABIs files: 
+Inspired by the [eigenevents](https://github.com/gowthamsundaresan/eigenevents) library, I have added PufferEvent.js in eigenscan-server. Inside, there are 4 ABIs files: 
 
 ## 1. PufferModuleManagerABI
 
