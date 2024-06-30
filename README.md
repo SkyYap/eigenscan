@@ -48,6 +48,7 @@ Inspired by the [eigenevents](https://github.com/gowthamsundaresan/eigenevents) 
 | Withdraw                    | Triggered when assets are withdrawn.                    | `sender` (address): Address of the sender who initiated the withdrawal. <br> `receiver` (address): Address of the receiver who received the withdrawn assets. <br> `owner` (address): Owner address. <br> `assets` (uint256): Amount of assets withdrawn. <br> `shares` (uint256): Amount of shares affected by the withdrawal. |
 
 4. ValidatorTicketABI
+
 | Event Name            | Description                                      | Output Parameters                                         |
 |-----------------------|--------------------------------------------------|-----------------------------------------------------------|
 | DispersedETH          | Triggered when ETH is dispersed.                 | `from` (address): The address from which ETH is dispersed. <br> `to` (address): The address to which ETH is dispersed. <br> `amount` (uint256): The amount of ETH dispersed. |
