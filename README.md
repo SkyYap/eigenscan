@@ -21,7 +21,7 @@ Inspired by the [eigenevents](https://github.com/gowthamsundaresan/eigenevents) 
 | getValidatorCredentialsVerified            | Emitted when validator credentials are verified.                                         | `validator`: address, `verified`: bool                              |
 | getVerifiedAndProcessedWithdrawals         | Emitted when withdrawals are verified and processed.                                     | `beneficiary`: address, `amount`: uint256                           |
 | getWithdrawalsQueued                       | Emitted when withdrawals are queued.                                                    | `beneficiary`: address, `amount`: uint256                           |
-                |
+
 
 ## 2. PufferProtocolABI 
 | Event Name                               | Description                                                                      | Output Params                                                                                                                                                            |
@@ -38,6 +38,7 @@ Inspired by the [eigenevents](https://github.com/gowthamsundaresan/eigenevents) 
 | getValidatorSkipped                         | Event emitted when a validator is skipped during provisioning.                    | pubKey (bytes), pufferModuleIndex (uint256), moduleName (bytes32)                                                                                                        |
 | getValidatorTicketsDeposited                | Event emitted when validator tickets are deposited.                               | node (address), depositor (address), amount (uint256)                                                                                                                    |
 | getValidatorTicketsWithdrawn                | Event emitted when validator tickets are withdrawn.                               | node (address), recipient (address), amount (uint256)                                                                                                                    |
+                                                                                                                  |
 
 
 ## 3. PufferVaultABI
@@ -46,7 +47,6 @@ Inspired by the [eigenevents](https://github.com/gowthamsundaresan/eigenevents) 
 |-----------------------------|--------------------------------------------------------|-----------------------------------------------------------------|
 | getAssetsWithdrawnToday        | Triggered when assets are withdrawn on the current day.| `withdrawalAmount (uint256)`                                    |
 | getClaimedWithdrawals          | Triggered when withdrawals are claimed.                | `requestIds (uint256[])`                                        |
-| getDailyWithdrawalLimitReset   | Triggered when the daily withdrawal limit is reset.    | None                                                            |
 | getDailyWithdrawalLimitSet     | Triggered when the daily withdrawal limit is set.      | `oldLimit (uint96)`, `newLimit (uint96)`                        |
 | getDeposit                     | Triggered when assets are deposited.                   | `sender (address)`, `owner (address)`, `assets (uint256)`, `shares (uint256)` |
 | getExitFeeBasisPointsSet       | Triggered when the exit fee basis points are set.      | `previousFee (uint256)`, `newFee (uint256)`                     |
@@ -55,6 +55,7 @@ Inspired by the [eigenevents](https://github.com/gowthamsundaresan/eigenevents) 
 | getTransfer                    | Triggered when tokens (or assets) are transferred.     | `from (address)`, `to (address)`, `value (uint256)`             |
 | getTransferredETH              | Triggered when ETH (Ether) is transferred.             | `to (address)`, `amount (uint256)`                              |
 | getWithdraw                    | Triggered when assets are withdrawn.                   | `sender (address)`, `receiver (address)`, `owner (address)`, `assets (uint256)`, `shares (uint256)` |
+
 
 ## 4. ValidatorTicketABI
 

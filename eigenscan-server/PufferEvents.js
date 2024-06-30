@@ -395,17 +395,6 @@ class PufferEvents {
         )
     }
 
-    async getDailyWithdrawalLimitReset(fromBlock, toBlock, realTime = false, callback = null) {
-        return this.getEvents(
-            "PufferVault",
-            "DailyWithdrawalLimitReset",
-            fromBlock,
-            toBlock,
-            realTime,
-            callback,
-        )
-    }
-
     async getDailyWithdrawalLimitSet(fromBlock, toBlock, realTime = false, callback = null) {
         return this.getEvents(
             "PufferVault",
@@ -851,8 +840,6 @@ class PufferEvents {
                 `Assets withdrawn today: Withdrawal amount (${params.withdrawalAmount})`,
             ClaimedWithdrawals: (params) =>
                 `Claimed withdrawals: Request IDs (${params.requestIds})`,
-            DailyWithdrawalLimitReset: (params) =>
-                `Daily withdrawal limit reset`,
             DailyWithdrawalLimitSet: (params) =>
                 `Daily withdrawal limit set: Old limit (${params.oldLimit}), New limit (${params.newLimit})`,
             Deposit: (params) =>
