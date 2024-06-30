@@ -1,12 +1,14 @@
 # Eigenscan is a fork and improved version of [Eigenscan](https://eigenscan.org)
+Inititially it contains only eigenevents library, socket and API to pull Eigenlayer mainnet contract for metric and event as well as showing metric and eigenlayer mainnet emitted events.
 
 This improved version consists of frontend and backend. The backend consists of several functions: 
 
 1. eigenevent (easily query eigenlayer mainnet contracts for emitted events (historical + real-time))
 2. pufferevent (easily query Puffer Finance mainnet contracts for emitted events (historical + real-time))
 3. integration of Dune and EigenExplorer API (can be tested using Swagger)
-4. socket and API to pull metric and event
-5. email notification to alert user based on grafana alerting
+4. socket and API to pull Eigenlayer mainnet contract for metric and event
+5. socket and API to pull Puffer Finance mainnet contract for metric and event
+6. email notification to alert user based on grafana alerting
 
 For the frontend, it consists of:
 1. showing metric and eigenlayer mainnet emitted events
