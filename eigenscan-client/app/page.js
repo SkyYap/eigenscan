@@ -191,10 +191,10 @@ export default function Home() {
                 <button
                     className="border border-eigen-light-blue bg-eigen-light-blue text-eigen-dark-blue hover:bg-eigen-dark-blue hover:text-eigen-light-blue rounded-md py-2 px-4 text-sm mr-2"
                     onClick={() => {
-                        window.location.href = 'http://localhost:3001/puffer-grafana';
+                        window.location.href = 'http://localhost:3001/puffer-host-metrics';
                     }}
                 >
-                    Puffer Grafana Dashboard
+                    Puffer Host Metrics
                 </button>
                 <button
                     className="border border-eigen-light-blue bg-eigen-light-blue text-eigen-dark-blue hover:bg-eigen-dark-blue hover:text-eigen-light-blue rounded-md py-2 px-4 text-sm"
