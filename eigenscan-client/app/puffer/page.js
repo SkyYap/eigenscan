@@ -26,6 +26,7 @@ export default function Home() {
     const [Operators, setOperators] = useState(0)
     const [Stakers, setStakers] = useState(0)
     const [TVL, setTVL] = useState(0)
+    const [RegisteredValidatorKey, setRegisteredValidatorKey] = useState(0)
 
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
 
@@ -131,18 +132,16 @@ export default function Home() {
     useEffect(() => {
         const fetchLatestData = async () => {
             const { data, error } = await supabase
-                .from("eigendata")
+                .from("pufferdata")
                 .select("*")
-                .order("created_at", { ascending: false })
-                .limit(1)
 
             if (error) {
                 console.error("Error fetching initial data: ", error)
             } else if (data && data.length > 0) {
-                setTVL(data[0].tvl_eth)
-                setAVSs(data[0].number_avs)
-                setOperators(data[0].number_operator)
-                setStakers(data[0].number_staker)
+                setRegisteredValidatorKey(data[0].number_validators)
+                // setAVSs(data[0].number_avs)
+                // setOperators(data[0].number_operator)
+                // setStakers(data[0].number_staker)
             }
         }
 
@@ -191,18 +190,18 @@ export default function Home() {
                 <button
                     className="border border-eigen-light-blue bg-eigen-light-blue text-eigen-dark-blue hover:bg-eigen-dark-blue hover:text-eigen-light-blue rounded-md py-2 px-4 text-sm mr-2"
                     onClick={() => {
-                        window.location.href = 'http://localhost:3001/puffer-grafana';
+                        window.location.href = 'http://localhost:3001/puffer-host-metrics';
                     }}
                 >
-                    Puffer Grafana Dashboard
+                    Puffer Host Metrics 
                 </button>
                 <button
                     className="border border-eigen-light-blue bg-eigen-light-blue text-eigen-dark-blue hover:bg-eigen-dark-blue hover:text-eigen-light-blue rounded-md py-2 px-4 text-sm"
                     onClick={() => {
-                        window.location.href = 'http://localhost:3001/puffer';
+                        window.location.href = 'http://localhost:3001';
                     }}
                 >
-                    Puffer Dashboard
+                    Eigenlayer Dashboard
                 </button>
             </nav>
             <div className="lg:px-24 md:px-16 px-4">
@@ -304,32 +303,32 @@ export default function Home() {
                             <div
                                 className={`border border-eigen-med-blue-2 bg-eigen-med-blue-2 rounded-lg flex-1 justify-center items-center py-4 px-4 ${ibm.className}`}
                             >
-                                <div className="text-center text-eigen-light-blue md:mb-2">TVL</div>
-                                <div className="text-center text-white  text-xl">{TVL} ETH</div>
+                                <div className="text-center text-eigen-light-blue md:mb-2">Registered Validator Keys</div>
+                                <div className="text-center text-white  text-xl">{RegisteredValidatorKey}</div>
                             </div>
                             <div
                                 className={`border border-eigen-med-blue-2 bg-eigen-med-blue-2 rounded-lg flex-1 justify-center items-center py-4 ${ibm.className}`}
                             >
                                 <div className="text-center text-eigen-light-blue md:mb-2">
-                                    AVSs
+                                    
                                 </div>
-                                <div className="text-center text-white text-xl">{AVSs}</div>
+                                <div className="text-center text-white text-xl"></div>
                             </div>
                             <div
                                 className={`border border-eigen-med-blue-2 bg-eigen-med-blue-2 rounded-lg flex-1 justify-center items-center py-4 ${ibm.className}`}
                             >
                                 <div className="text-center text-eigen-light-blue md:mb-2">
-                                    Operators
+                                    
                                 </div>
-                                <div className="text-center text-white text-xl">{Operators}</div>
+                                <div className="text-center text-white text-xl"></div>
                             </div>
                             <div
                                 className={`border border-eigen-med-blue-2 bg-eigen-med-blue-2 rounded-lg flex-1 justify-center items-center py-4 ${ibm.className}`}
                             >
                                 <div className="text-center text-eigen-light-blue md:mb-2">
-                                    Stakers
+                                    
                                 </div>
-                                <div className="text-center text-white text-xl">{Stakers}</div>
+                                <div className="text-center text-white text-xl"></div>
                             </div>
                         </div>
                         <div className="overflow-x-auto">

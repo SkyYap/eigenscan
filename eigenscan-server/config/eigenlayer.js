@@ -3,7 +3,7 @@ const API_ROUTE_BASE_URL = '/api/dune';
 function getFullUrl(path) {
     if (typeof window === 'undefined') {
         // Running on the server, use absolute URL
-        return `http://localhost:3000${path}`;
+        return `http://localhost:8000${path}`;
     }
     // Running on the client, use relative URL
     return path;

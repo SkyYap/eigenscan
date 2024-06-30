@@ -7,15 +7,10 @@ dotenv.config();
 import "./config/email.js";
 import { sendEmail } from './config/email.js';
 import { asyncHandler } from './middleware/asyncErrorHandler.js';
-import {
-    GetAVSStats,
-    GetAVSMetadata,
-    GetCombinedAVSData,
-    GetOperators,
-    GetOperatorStats,
-    GetOperatorMetadata,
-    GetCombinedOperatorsData
-} from './config/eigenlayer.js';
+import router from './api/dune.js'; 
+import eigenrouter from './api/eigenexplorer.js';
+import swaggerUi from 'swagger-ui-express';
+import specs from './config/swaggerConfig.js'; 
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -24,87 +19,16 @@ const port = process.env.PORT || 8000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-app.use(cors()); 
+app.use(cors());
 
-// Endpoint to get AVS stats
-app.post('/avs-stats-dune', async (req, res) => {
-    const { limit, sortBy, nextUri } = req.query;
-    try {
-        const data = await GetAVSStats(parseInt(limit) || 10, sortBy || 'num_operators desc', nextUri || '');
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+// Serve Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-// Endpoint to get AVS metadata
-app.post('/avs-metadata-dune', async (req, res) => {
-    const { avsAddresses } = req.query;
-    const addresses = avsAddresses ? avsAddresses.split(',') : [];
-    try {
-        const data = await GetAVSMetadata(addresses);
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+// Mounting the Dune API router
+app.use('/api/dune', router);
 
-// Endpoint to get combined AVS data
-app.post('/combined-avs-data-dune', async (req, res) => {
-    const { limit, offset, sortBy, nextUri } = req.query;
-    try {
-        const data = await GetCombinedAVSData(parseInt(limit) || 8, parseInt(offset) || 0, sortBy || 'num_operators desc', nextUri || '');
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Endpoint to get operators for an AVS address
-app.post('/operators-dune', async (req, res) => {
-    const { avsAddress } = req.query;
-    try {
-        const data = await GetOperators(avsAddress);
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Endpoint to get operator stats
-app.post('/operator-stats-dune', async (req, res) => {
-    const { operatorAddresses } = req.query;
-    const addresses = operatorAddresses ? operatorAddresses.split(',') : [];
-    try {
-        const data = await GetOperatorStats(addresses);
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Endpoint to get operator metadata
-app.post('/operator-metadata-dune', async (req, res) => {
-    const { operatorAddresses } = req.query;
-    const addresses = operatorAddresses ? operatorAddresses.split(',') : [];
-    try {
-        const data = await GetOperatorMetadata(addresses);
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Endpoint to get combined operator data for an AVS address
-app.post('/combined-operators-data-dune', async (req, res) => {
-    const { avsAddress, batchStart, batchSize } = req.query;
-    try {
-        const data = await GetCombinedOperatorsData(avsAddress, parseInt(batchStart) || 0, parseInt(batchSize) || 10);
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+// Mounting the Eigen Explorer API router
+app.use('/api/eigenexplorer', eigenrouter);
 
 // Route to test send email
 app.post('/send-email', asyncHandler(async (req, res) => {
